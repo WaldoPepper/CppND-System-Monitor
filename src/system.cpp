@@ -18,7 +18,17 @@ using std::vector;
 Processor& System::Cpu() { return cpu_; }
 
 // TODO: Return a container composed of the system's processes
-vector<Process>& System::Processes() { return processes_; }
+vector<Process>& System::Processes() { 
+  vector<int> processes_pids = LinuxParser::Pids();
+  // TODO: Can I not clear and recreate all the Process everytime this function is called?
+  processes_.clear();
+  for (size_t i = 0; i < processes_pids.size(); ++i) {
+    Process* new_process = new Process(processes_pids.at(i));
+    processes_.push_back(*new_process);
+    delete(new_process);
+  }
+  return processes_;
+}
 
 // #DONE TODO: Return the system's kernel identifier (string)
 std::string System::Kernel() { return LinuxParser::Kernel(); }

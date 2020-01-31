@@ -6,7 +6,6 @@
 
 int main() {
   System system;
-  // float x = LinuxParser::MemoryUtilization();
-  // std::cout << x << "\n";
-  NCursesDisplay::Display(system);
+  int processes_to_display = 30;
+  NCursesDisplay::Display(system, processes_to_display);
 }
