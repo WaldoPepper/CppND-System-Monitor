@@ -42,7 +42,7 @@ enum CPUStates {
   kGuestNice_
 };
 
-enum CPUTime { kIdleTime_ = 0, kNonIdleTime_, kTotalTime_ };
+enum CPUTime { kIdleTime_ = 0, kActiveTime_, kTotalTime_ };
 
 enum MemoryType {
   kMemTotal_ = 0,

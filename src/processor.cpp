@@ -1,5 +1,5 @@
-#include "linux_parser.h"
 #include "processor.h"
+#include "linux_parser.h"
 
 using LinuxParser::CPUTime;
 using std::vector;
@@ -15,7 +15,8 @@ float Processor::Utilization() {
   return utilization;
 }
 
-void Processor::CalculateDeltaTime(vector<int>& first_cpu_jiffies, vector<int>& second_cpu_jiffies) {
+void Processor::CalculateDeltaTime(vector<int>& first_cpu_jiffies,
+                                   vector<int>& second_cpu_jiffies) {
   delta_time_.clear();
   for (int i = 0; i < 3; ++i) {
     delta_time_.push_back(first_cpu_jiffies.at(i) - second_cpu_jiffies.at(i));
@@ -32,9 +33,11 @@ void Processor::GetLinuxParsesForJiffies(vector<int>& cpu_jiffies) {
 float Processor::CalculateUtilization() {
   float small_number_buffer = 0.0000000001;
   float utilization =
-      delta_time_.at(CPUTime::kNonIdleTime_) /
+      delta_time_.at(CPUTime::kActiveTime_) /
       (delta_time_.at(CPUTime::kTotalTime_) + small_number_buffer);
   return utilization;
 }
 
-long Processor::getTotalJiffies() { return current_cpu_jiffies_.at(CPUTime::kTotalTime_); }
+long Processor::getTotalJiffies() {
+  return current_cpu_jiffies_.at(CPUTime::kTotalTime_);
+}

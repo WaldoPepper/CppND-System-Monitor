@@ -36,9 +36,9 @@ string LinuxParser::OperatingSystem() {
 string LinuxParser::Kernel() {
   string os, version, kernel;
   string line;
-  std::ifstream stream(kProcDirectory + kVersionFilename);
-  if (stream.is_open()) {
-    std::getline(stream, line);
+  std::ifstream filestream(kProcDirectory + kVersionFilename);
+  if (filestream.is_open()) {
+    std::getline(filestream, line);
     std::istringstream linestream(line);
     linestream >> os >> version >> kernel;
   }
@@ -65,7 +65,7 @@ vector<int> LinuxParser::Pids() {
   return pids;
 }
 
-// #DONE TODO: Read and return the system memory utilization
+// DONE: Read and return the system memory utilization
 float LinuxParser::MemoryUtilization() {
   string key, unit, line;
   float value;
@@ -89,7 +89,7 @@ float LinuxParser::MemoryUtilization() {
   return utilization;
 }
 
-// TODO: Read and return the number of jiffies for the system
+// DONE: Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() {
   string line, cpu_string;
   long value, total_jiffies{0};
@@ -105,7 +105,7 @@ long LinuxParser::Jiffies() {
   return total_jiffies;
 }
 
-// TODO: Read and return the number of active jiffies for a PID
+// DONE: Read and return the number of active jiffies for a PID
 // REMOVE: [[maybe_unused]] once you define the function
 long LinuxParser::ActiveJiffies(int pid) {
   string key, line;

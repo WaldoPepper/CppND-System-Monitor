@@ -11,7 +11,6 @@ using std::vector;
 class Processor {
  public:
   Processor();
-  virtual ~Processor() {};
   virtual float Utilization();  // TODO: See src/processor.cpp
   long getTotalJiffies();
 
