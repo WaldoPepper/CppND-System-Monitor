@@ -10,10 +10,13 @@ using std::vector;
 Processor::Processor() {
   prev_cpu_data_ = LinuxParser::CpuUtilization();
   CalculateCpuTime(prev_cpu_data_, prev_cpu_time_);
+  total_jiffies_ = LinuxParser::Jiffies();
 }
 
 // TODO: Return the aggregate CPU utilization
 float Processor::Utilization() {
+  total_jiffies_ = LinuxParser::Jiffies();
+
   current_cpu_data_ = LinuxParser::CpuUtilization();
   CalculateCpuTime(current_cpu_data_, current_cpu_time_);
   CalculateDeltaTime();
@@ -50,3 +53,5 @@ void Processor::CalculateDeltaTime() {
     delta_time_.push_back(current_cpu_time_.at(i) - prev_cpu_time_.at(i));
   }
 }
+
+long Processor::getTotalJiffies() { return total_jiffies_; }

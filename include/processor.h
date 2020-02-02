@@ -14,6 +14,7 @@ class Processor {
  public:
   Processor();
   float Utilization();  // TODO: See src/processor.cpp
+  long getTotalJiffies();
 
   // TODO: Declare any necessary private members
  private:
@@ -24,6 +25,9 @@ class Processor {
   vector<int> current_cpu_time_;
   vector<int> prev_cpu_time_;
   vector<float> delta_time_;
+  long total_jiffies_;
+  long active_jiffies_;
+  long idle_jiffies_;
 };
 
 #endif
