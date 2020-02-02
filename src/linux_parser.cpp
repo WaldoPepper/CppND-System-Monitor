@@ -166,23 +166,6 @@ long LinuxParser::IdleJiffies() {
   return idle_jiffies;
 }
 
-// TODO: Read and return CPU utilization
-vector<int> LinuxParser::CpuUtilization() {
-  string line, cpu_string;
-  int value;
-  vector<int> cpu_data{};
-  std::ifstream filestream(kProcDirectory + kStatFilename);
-  if (filestream.is_open()) {
-    std::getline(filestream, line);
-    std::istringstream linestream(line);
-    linestream >> cpu_string;  // pop first string
-    while (linestream >> value) {
-      cpu_data.push_back(value);
-    }
-  }
-  return cpu_data;
-}
-
 // DONE TODO: Read and return UpTime
 long LinuxParser::UpTime() {
   string line;
