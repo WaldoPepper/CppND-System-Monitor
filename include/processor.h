@@ -5,23 +5,22 @@
 
 using std::vector;
 
-// TODO (KK): use instantenous CPU utulization
-// Utilization = no of time instant that CPU is working / total time
-
 class Processor {
  public:
   Processor();
-  virtual float Utilization();  // TODO: See src/processor.cpp
+  float Utilization();
   long getTotalJiffies();
 
-  // TODO: Declare any necessary private members
- protected:
+ private:
   void CalculateDeltaTime(vector<int>&, vector<int>&);
   virtual void GetLinuxParsesForJiffies(vector<int>&);
   float CalculateUtilization();
+  
+  // cpu_jiffies vectors are organised with [0] = ActiveJiffies [1] =
+  // NonIdleJiffies [2] = TotalJiffies
   vector<int> current_cpu_jiffies_;
   vector<int> prev_cpu_jiffies_;
-  vector<float> delta_time_;
+  vector<float> delta_jiffies_;
 };
 
 #endif
