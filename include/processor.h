@@ -1,9 +1,11 @@
 #ifndef PROCESSOR_H
 #define PROCESSOR_H
 
+#include <array>
 #include <vector>
 
 using std::vector;
+using std::array;
 
 class Processor {
  public:
@@ -12,15 +14,16 @@ class Processor {
   long getTotalJiffies();
 
  private:
-  void CalculateDeltaTime(vector<int>&, vector<int>&);
-  virtual void GetLinuxParsesForJiffies(vector<int>&);
+  void CalculateDeltaTime(array<long, 3>&, array<long, 3>&);
+  virtual void GetLinuxParsesForJiffies(array<long, 3>&);
   float CalculateUtilization();
-  
-  // cpu_jiffies vectors are organised with [0] = ActiveJiffies [1] =
+  void UpdatePrevJiffies();
+
+  // cpu_jiffies arrays are organised with [0] = ActiveJiffies [1] =
   // NonIdleJiffies [2] = TotalJiffies
-  vector<int> current_cpu_jiffies_;
-  vector<int> prev_cpu_jiffies_;
-  vector<float> delta_jiffies_;
+  array<long, 3> current_cpu_jiffies_;
+  array<long, 3> prev_cpu_jiffies_;
+  array<float, 3> delta_jiffies_;
 };
 
 #endif
