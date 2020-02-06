@@ -21,10 +21,7 @@ vector<Process>& System::Processes() {
 
   processes_.clear();
   for (size_t i = 0; i < processes_pids.size(); ++i) {
-    Process* new_process =
-        new Process(processes_pids.at(i), cpu_.getTotalJiffies());
-    processes_.push_back(*new_process);
-    delete (new_process);
+    processes_.emplace_back(processes_pids.at(i), cpu_.getTotalJiffies());
   }
 
   // Sort Processes based on each process' CPU utilization
